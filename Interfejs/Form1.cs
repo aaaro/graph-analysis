@@ -8,6 +8,7 @@ namespace Interfejs
 {
     public partial class Form1 : Form
     {
+        //class for right-click menu ability 
         public class MyContextMenu : ContextMenu
         {
             public MyContextMenu()
@@ -93,6 +94,7 @@ namespace Interfejs
 
             }
         }
+        //Edge class made of 2 Vertices
         public class Edge
         {
             public Vertex v1, v2;
