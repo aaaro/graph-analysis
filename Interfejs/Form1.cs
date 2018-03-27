@@ -27,6 +27,7 @@ namespace Interfejs
         public static Vertex toLink;
         public static Point toLinkPos;
         public static Graphics graphic;
+        //Graph class
         public class Graph
         {
             public List<Vertex> VertexList;
