@@ -8,7 +8,7 @@ namespace Interfejs
 {
     public partial class Form1 : Form
     {
-        //class for right-click menu ability 
+        //class for a right-click menu 
         public class MyContextMenu : ContextMenu
         {
             public MyContextMenu()
@@ -22,6 +22,7 @@ namespace Interfejs
                 SourceControl.Dispose();
             }
         }
+
         public static Graph g;
         public static Vertex toLink;
         public static Point toLinkPos;
@@ -30,20 +31,18 @@ namespace Interfejs
         {
             public List<Vertex> VertexList;
             public List<Edge> EdgeList;
+            //Public constructor
             public Graph()
             {
                 VertexList = new List<Vertex>();
                 EdgeList = new List<Edge>();
             }
+            //Adds the vertex to the graph
             public void AddVertex(Vertex v)
             {
                 VertexList.Add(v);
             }
-            public void AddVertex(Point p)
-            {
-                Vertex v = new Vertex(p);
-                VertexList.Add(v);
-            }
+            //Removes vertex and all edges connected to it from the graph 
             public void RemoveVertex(Vertex v)
             {
                 VertexList.Remove(v);
@@ -51,31 +50,36 @@ namespace Interfejs
                 for(int i = 0; i < EdgeList.Count; i++)
                 {
                     Edge e = EdgeList[i];
-                    if(e.v1 == v || e.v2 == v)
+                    if(e.Contains(v))
                     {
                         delete.Add(e);
                     }
                 }
+                //draws white line over edge to 'erase' it
                 foreach(var item in delete)
                 {
                     EdgeList.Remove(item);
                     graphic.DrawLine(new Pen(Color.White, 5), item.v1.Position, item.v2.Position);
                 }
             }
+            //Adds the edge to the graph
             public void AddEdge(Edge e)
             {
                 EdgeList.Add(e);
             }
+            //Writes down all vertices in the graph to the console
             public void WriteVertices()
             {
                 foreach(var item in VertexList)
                     Console.WriteLine(item);
             }
+            //Writes down all edges in the graph to the console
             public void WriteEdges()
             {
                 foreach(var item in EdgeList)
                     Console.WriteLine(item);
             }
+            //Returns adjacency matrix representing the graph
             public int[,] ToMatrix()
             {
                 int n = Convert.ToInt32(VertexList[VertexList.Count - 1].Text);
@@ -89,8 +93,14 @@ namespace Interfejs
             }
             public void Explore(Vertex start)
             {
-                // DFS algorithm here
+                // Explore algorithm here
                
+
+            }
+            public void DFS(Vertex start)
+            {
+                // DFS algorithm here
+
 
             }
         }
@@ -98,30 +108,46 @@ namespace Interfejs
         public class Edge
         {
             public Vertex v1, v2;
+            //Public constructor
             public Edge(Vertex v1, Vertex v2)
             {
                 this.v1 = v1;
                 this.v2 = v2;
             }
+            //Draws the edge on the form
             public void DrawEdge()
             {
                 Pen pen = new Pen(Color.Black,5);
                 graphic.DrawLine(pen, v1.Position, v2.Position);
             }
+            //Checks if the edge contains a vertex
+            public bool Contains(Vertex v)
+            {
+                if (v1 == v || v2 == v)
+                {
+                    return true;
+                }
+                return false;
+            }
+            //ToString
             public override string ToString()
             {
                 return "(" + v1 + ", " + v2 + ")";
             }
         }
+
+        //Vertex class based on Label
         public class Vertex : Label
         {
             public static int vertexCount = 0;
             bool visited, post;
             public Point Position;
+            //ToString
             public override string ToString()
             {
                 return Text;
             }
+            //Public constructor
             public Vertex(Point p)
             {
                 ContextMenu = new MyContextMenu();
@@ -138,6 +164,7 @@ namespace Interfejs
                 visited = false;
                 post = false;
             }
+            //After clicking on 2 vertices creates an edge between them
             public void CreateEdge(object sender, EventArgs e)
             {
                 MouseEventArgs me = e as MouseEventArgs;
@@ -172,12 +199,14 @@ namespace Interfejs
                 }
             }
         }
+        //Creates a new vertex in the given point and adds it to the graph
         public void AddVertex(Point p)
         {
             Vertex v = new Vertex(p);
             Controls.Add(v);
             g.AddVertex(v);
         }
+        //Public constructor
         public Form1()
         {
             InitializeComponent();
@@ -185,7 +214,7 @@ namespace Interfejs
             graphic = CreateGraphics();
             toLink = null;        
         }
-
+        //On double click creates and adds a new vertex to the graph
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
             MouseEventArgs me = e as MouseEventArgs;
@@ -194,14 +223,14 @@ namespace Interfejs
                 AddVertex(PointToClient(new Point(MousePosition.X - 10, MousePosition.Y - 12)));
             }
         }
-
+        //Clears the drawings on the form
         private void button1_Click(object sender, EventArgs e)
         {
             graphic.Clear(Color.White);
-            g.WriteVertices();
-            g.WriteEdges();
+            //g.WriteVertices();
+            //g.WriteEdges();
         }
-
+        //Saves the current graph into an adjacency matrix inside a txt file
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //save to .txt file as a matrix
