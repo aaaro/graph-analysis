@@ -88,7 +88,7 @@ namespace Interfejs
             }
             public void Explore(Vertex start)
             {
-
+                // DFS algorithm here
                
 
             }
