@@ -228,6 +228,12 @@ namespace Interfejs
         private void button1_Click(object sender, EventArgs e)
         {
             graphic.Clear(Color.White);
+            g.EdgeList.Clear();
+            foreach(var item in g.VertexList)
+            {
+                item.Dispose();
+            }
+            Vertex.vertexCount = 0;
             //g.WriteVertices();
             //g.WriteEdges();
         }
