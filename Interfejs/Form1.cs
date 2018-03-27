@@ -8,7 +8,7 @@ namespace Interfejs
 {
     public partial class Form1 : Form
     {
-        //class for right-click menu ability 
+        //class for a right-click menu 
         public class MyContextMenu : ContextMenu
         {
             public MyContextMenu()
@@ -30,6 +30,7 @@ namespace Interfejs
         {
             public List<Vertex> VertexList;
             public List<Edge> EdgeList;
+            //Constructor
             public Graph()
             {
                 VertexList = new List<Vertex>();
@@ -89,8 +90,14 @@ namespace Interfejs
             }
             public void Explore(Vertex start)
             {
-                // DFS algorithm here
+                // Explore algorithm here
                
+
+            }
+            public void DFS(Vertex start)
+            {
+                // DFS algorithm here
+
 
             }
         }
