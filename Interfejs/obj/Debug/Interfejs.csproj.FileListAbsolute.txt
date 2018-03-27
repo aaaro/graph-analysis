@@ -1,0 +1,11 @@
+c:\users\arek\documents\visual studio 2015\Projects\Mosty\Interfejs\bin\Debug\Interfejs.exe.config
+c:\users\arek\documents\visual studio 2015\Projects\Mosty\Interfejs\bin\Debug\Interfejs.exe
+c:\users\arek\documents\visual studio 2015\Projects\Mosty\Interfejs\bin\Debug\Interfejs.pdb
+c:\users\arek\documents\visual studio 2015\Projects\Mosty\Interfejs\obj\Debug\Interfejs.csprojResolveAssemblyReference.cache
+c:\users\arek\documents\visual studio 2015\Projects\Mosty\Interfejs\obj\Debug\Interfejs.Properties.Resources.resources
+c:\users\arek\documents\visual studio 2015\Projects\Mosty\Interfejs\obj\Debug\Interfejs.csproj.GenerateResource.Cache
+c:\users\arek\documents\visual studio 2015\Projects\Mosty\Interfejs\obj\Debug\Interfejs.exe
+c:\users\arek\documents\visual studio 2015\Projects\Mosty\Interfejs\obj\Debug\Interfejs.pdb
+c:\users\arek\documents\visual studio 2015\Projects\Mosty\Interfejs\bin\Debug\Grafy.dll
+c:\users\arek\documents\visual studio 2015\Projects\Mosty\Interfejs\bin\Debug\Grafy.pdb
+C:\Users\Arek\documents\visual studio 2015\Projects\Mosty\Interfejs\obj\Debug\Interfejs.Form1.resources
