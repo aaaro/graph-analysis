@@ -8,12 +8,15 @@
         Title="MainWindow" Height="720" Width="1280">
     <Grid>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="104" Margin="1100,550,0,0" VerticalAlignment="Top" Width="132"/>
+<<<<<<< HEAD
         <CheckBox x:Name="checkBox" Content="BOX" HorizontalAlignment="Left" Margin="1077,416,0,0" VerticalAlignment="Top" Height="57" Width="155" Checked="checkBox_Checked" RenderTransformOrigin="0.545,0.493" Cursor="Arrow"/>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="1272" Background="#FFBFB9B9">
             <MenuItem Header="Input">
                 <MenuItem Header="Ręcznie"/>
             </MenuItem>
         </Menu>
+=======
+>>>>>>> 8fe22bddc201acb5537d3a8919869de1db08e454
 
     </Grid>
 </Window>
