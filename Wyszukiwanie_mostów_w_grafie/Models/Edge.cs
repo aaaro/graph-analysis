@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Wyszukiwanie_mostów_w_grafie.Models
 {
-    class Verticle
+    class Edge
     {
         Vertex u;
         Vertex v;
         bool directed;
 
-        public Verticle(Vertex u, Vertex v, bool directed)
+        public Edge(Vertex u, Vertex v, bool directed)
         {
             this.u = u;
             this.v = v;
