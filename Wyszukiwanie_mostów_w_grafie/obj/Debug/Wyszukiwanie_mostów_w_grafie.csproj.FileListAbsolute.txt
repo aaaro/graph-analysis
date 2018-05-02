@@ -1,0 +1,15 @@
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\bin\Debug\Wyszukiwanie_mostów_w_grafie.exe.config
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\bin\Debug\Wyszukiwanie_mostów_w_grafie.exe
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\bin\Debug\Wyszukiwanie_mostów_w_grafie.pdb
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\Wyszukiwanie_mostów_w_grafie.csprojResolveAssemblyReference.cache
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\MainWindow.g.cs
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\App.g.cs
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\Wyszukiwanie_mostów_w_grafie_MarkupCompile.cache
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\Wyszukiwanie_mostów_w_grafie_MarkupCompile.lref
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\MainWindow.baml
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\Wyszukiwanie_mostów_w_grafie.g.resources
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\Wyszukiwanie_mostów_w_grafie.Properties.Resources.resources
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\Wyszukiwanie_mostów_w_grafie.csproj.GenerateResource.cache
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\Wyszukiwanie_mostów_w_grafie.csproj.CoreCompileInputs.cache
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\Wyszukiwanie_mostów_w_grafie.exe
+C:\Users\Wiktor\Documents\GitHub\graph-analysis\Wyszukiwanie_mostów_w_grafie\obj\Debug\Wyszukiwanie_mostów_w_grafie.pdb
