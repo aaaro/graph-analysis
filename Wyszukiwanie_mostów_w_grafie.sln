@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wyszukiwanie_mostów_w_grafie", "Wyszukiwanie_mostów_w_grafie\Wyszukiwanie_mostów_w_grafie.csproj", "{E56B54F6-95E0-4B94-A5EA-92F48D921920}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E56B54F6-95E0-4B94-A5EA-92F48D921920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E56B54F6-95E0-4B94-A5EA-92F48D921920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E56B54F6-95E0-4B94-A5EA-92F48D921920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E56B54F6-95E0-4B94-A5EA-92F48D921920}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30A63347-0A0D-4D78-9D3F-D7933B6BD4D5}
+	EndGlobalSection
+EndGlobal

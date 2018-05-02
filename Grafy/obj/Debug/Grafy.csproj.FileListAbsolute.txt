@@ -1,5 +1,0 @@
-c:\users\arek\documents\visual studio 2015\Projects\Mosty\Grafy\bin\Debug\Grafy.dll
-c:\users\arek\documents\visual studio 2015\Projects\Mosty\Grafy\bin\Debug\Grafy.pdb
-c:\users\arek\documents\visual studio 2015\Projects\Mosty\Grafy\obj\Debug\Grafy.csprojResolveAssemblyReference.cache
-c:\users\arek\documents\visual studio 2015\Projects\Mosty\Grafy\obj\Debug\Grafy.dll
-c:\users\arek\documents\visual studio 2015\Projects\Mosty\Grafy\obj\Debug\Grafy.pdb
