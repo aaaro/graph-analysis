@@ -20,14 +20,41 @@ namespace Wyszukiwanie_mostów_w_grafie
     /// </summary>
     public partial class MainWindow : Window
     {
+        int n = 0;
         public MainWindow()
         {
             InitializeComponent();
         }
-
-        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        public void DrawSpace_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            n++;
+            Ellipse square = new Ellipse
+            {
+                Width = 50,
+                Height = 50,
+                Fill = Brushes.White,
+                Stroke = Brushes.Black,
+                StrokeThickness = 2
 
+            };
+            TextBox number = new TextBox
+            {
+
+                Width = 40,
+                Height = 40,
+                Background = Brushes.Transparent,
+                BorderThickness = new Thickness(0, 0, 0, 0),
+                Text = Convert.ToString(n),
+                FontSize = 30,
+                TextAlignment = TextAlignment.Center
+            };
+            DrawSpace.Children.Add(square);
+            DrawSpace.Children.Add(number);
+            Canvas.SetLeft(square, e.GetPosition(DrawSpace).X - 25);
+            Canvas.SetTop(square, e.GetPosition(DrawSpace).Y - 25);
+            Canvas.SetLeft(number, e.GetPosition(DrawSpace).X - 20);
+            Canvas.SetTop(number, e.GetPosition(DrawSpace).Y - 20);
         }
+        
     }
 }

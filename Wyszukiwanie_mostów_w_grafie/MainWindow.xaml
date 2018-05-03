@@ -12,6 +12,8 @@
                 <MenuItem Header="Ręcznie"/>
             </MenuItem>
         </Menu>
+        <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="621" Margin="10,68,0,0" VerticalAlignment="Top" Width="865" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White"/>
+
 
     </Grid>
 </Window>
