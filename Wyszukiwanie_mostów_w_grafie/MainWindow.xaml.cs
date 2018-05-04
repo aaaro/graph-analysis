@@ -24,6 +24,8 @@ namespace Wyszukiwanie_mostów_w_grafie
         //flagi do rozróżnienia, która akcja powinna odbywać się w danym momencie
         public static bool edgeFlag = false;
         public static bool vertexFlag = false;
+        public static bool deleteFlag = false;
+
         //wskaźnik pokazujący na ostatni wybrany wierzchołek (wykorzystywany w tworzeniu krawędzi)
         Vertex tmp;
         public MainWindow()
@@ -72,36 +74,66 @@ namespace Wyszukiwanie_mostów_w_grafie
                     line.Stroke = Brushes.Black;
                     line.StrokeThickness = 8;
                     line.MouseRightButtonDown += Line_MouseRightButtonDown;
-                    
+                    line.MouseLeftButtonDown += Line_MouseLeftButtonDown;
+
                     DrawSpace.Children.Add(line);
                     tmp = null;
                 }
+            }
+            if(deleteFlag)
+            {
+                Canvas c = sender as Canvas;
+                DrawSpace.Children.Remove(c);
             }
         }
         //Wciśnięcie prawego przycisku myszy na narysowanej krawędzi
         private void Line_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Line l = sender as Line;
-            DrawSpace.Children.Remove(l);
+            if (deleteFlag)
+            {
+                Line l = sender as Line;
+                DrawSpace.Children.Remove(l);
+            }
         }
-
+        //Wciśnięcie lewego przycisku myszy na narysowanej krawędzi
+        private void Line_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (deleteFlag)
+            {
+                Line l = sender as Line;
+                DrawSpace.Children.Remove(l);
+            }
+        }
         //Wciśnięcie prawego przycisku myszy na narysowanym wierzchołku
         private void vertex_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Canvas c = sender as Canvas;
-            DrawSpace.Children.Remove(c);
+            if (deleteFlag)
+            {
+                Canvas c = sender as Canvas;
+                DrawSpace.Children.Remove(c);
+            }
         }
         //Obsługa przycisku do rysowania krawędzi
         private void AddEdge_Click(object sender, RoutedEventArgs e)
         {
             edgeFlag = true;
             vertexFlag = false;
+            deleteFlag = false;
         }
         //Obsługa przycisku do rysowania wierzchołków
         private void AddVertex_Click(object sender, RoutedEventArgs e)
         {
             edgeFlag = false;
             vertexFlag = true;
+            deleteFlag = false;
+
+        }
+        //Obsługa przycisku do usuwania elementów
+        private void DeleteElements_Click(object sender, RoutedEventArgs e)
+        {
+            edgeFlag = false;
+            vertexFlag = false;
+            deleteFlag = true;
         }
     }
 }

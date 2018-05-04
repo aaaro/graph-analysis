@@ -20,6 +20,9 @@
         <Button x:Name="AddVertex" HorizontalAlignment="Left" Height="90" Margin="1143,50,0,0" VerticalAlignment="Top" Width="90" Click="AddVertex_Click">
             <TextBlock Text="Dodaj wierzchołek" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
+        <Button x:Name="DeleteElements" HorizontalAlignment="Left" Height="90" Margin="1143,275,0,0" VerticalAlignment="Top" Width="90" Click="DeleteElements_Click">
+            <TextBlock Text="Usuń wybrane elementy" TextWrapping="Wrap" TextAlignment="Center" />
+        </Button>
 
 
     </Grid>
