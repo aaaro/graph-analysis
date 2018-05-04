@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wyszukiwanie_mostów_w_grafie"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280">
+        Title="Poszukiwanie mostów" Height="720" Width="1280" Name="window">
     <Grid>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="1272" Background="#FFBFB9B9">
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="auto" Background="#FFBFB9B9">
             <MenuItem Header="Input">
                 <MenuItem Header="Ręcznie"/>
             </MenuItem>
         </Menu>
-        <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="621" Margin="10,68,0,0" VerticalAlignment="Top" Width="865" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White" MouseRightButtonDown="DrawSpace_MouseRightButtonDown"/>
+        <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="667" Margin="0,22,0,0" VerticalAlignment="Top" Width="1272" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White"/>
 
 
     </Grid>
