@@ -22,20 +22,25 @@ namespace Wyszukiwanie_mostów_w_grafie
     public partial class MainWindow : Window
     {
         //flagi do rozróżnienia, która akcja powinna odbywać się w danym momencie
-        public static bool edgeFlag = false;
-        public static bool directedFlag = false;
-        public static bool vertexFlag = false;
-        public static bool deleteFlag = false;
+        public bool edgeFlag;
+        public bool directedFlag;
+        public bool vertexFlag;
+        public bool deleteFlag;
 
         //wskaźnik pokazujący na ostatni wybrany wierzchołek (wykorzystywany w tworzeniu krawędzi)
         Vertex tmp;
-        //Graf
+        //Objekt grafu
         Graph graph;
+        //Konstruktor okna
         public MainWindow()
         {
             InitializeComponent();
             graph = new Graph();
             tmp = null;
+            edgeFlag = false;
+            directedFlag = false;
+            vertexFlag = false;
+            deleteFlag = false;
         }
         //Wciśnięcie lewego przycisku myszy na canvasie
         public void DrawSpace_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -57,7 +62,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         //Wciśnięcie lewego przycisku myszy na narysowanym wierzchołku
         private void vertex_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if(edgeFlag)
+            if(edgeFlag || directedFlag)
             {
                 Vertex v = sender as Vertex;
                 //po wyborze pierwszego wierzchołka
@@ -73,17 +78,18 @@ namespace Wyszukiwanie_mostów_w_grafie
                     //rysowanie zwykłej linii pomiędzy środkami wierzchołków
                     tmp.textBox.Foreground = Brushes.Black;
                     tmp.ellipse.Stroke = Brushes.Black;
-                    Line line = new Line();
-                    line.X1 = Canvas.GetLeft(tmp) + 25;
-                    line.Y1 = Canvas.GetTop(tmp) + 25;
-                    line.X2 = Canvas.GetLeft(v) + 25;
-                    line.Y2 = Canvas.GetTop(v) + 25;
-                    line.Stroke = Brushes.Black;
-                    line.StrokeThickness = 8;
-                    line.MouseRightButtonDown += Line_MouseRightButtonDown;
-                    line.MouseLeftButtonDown += Line_MouseLeftButtonDown;
 
-                    DrawSpace.Children.Add(line);
+                    Edge edge;
+                    if (directedFlag)
+                        edge = new Edge(tmp, v);
+                    else
+                        edge = new Edge(tmp, v, true);
+                    edge.MouseRightButtonDown += edge_MouseRightButtonDown;
+                    edge.MouseLeftButtonDown += edge_MouseLeftButtonDown;
+                   
+                    DrawSpace.Children.Add(edge);
+
+                    graph.Edges.Add(edge);
                     tmp = null;
                 }
                 else
@@ -95,11 +101,12 @@ namespace Wyszukiwanie_mostów_w_grafie
             if(deleteFlag)
             {
                 Vertex toDelete = sender as Vertex;
+                graph.Remove(toDelete);
                 DrawSpace.Children.Remove(toDelete);
             }
         }
         //Wciśnięcie prawego przycisku myszy na narysowanej krawędzi
-        private void Line_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void edge_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (deleteFlag)
             {
@@ -108,7 +115,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             }
         }
         //Wciśnięcie lewego przycisku myszy na narysowanej krawędzi
-        private void Line_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void edge_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (deleteFlag)
             {
