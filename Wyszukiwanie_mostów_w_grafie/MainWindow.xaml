@@ -15,13 +15,16 @@
         <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="667" Margin="0,22,0,0" VerticalAlignment="Top" Width="1102" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White"/>
         <DockPanel x:Name="ToolBar" HorizontalAlignment="Center" Height="668" LastChildFill="False" Margin="1102,22,0,0" VerticalAlignment="Top" Width="170" Background="DarkGray"/>
         <Button x:Name="AddEdge" HorizontalAlignment="Left" Height="90" Margin="1143,160,0,0" VerticalAlignment="Top" Width="90" Click="AddEdge_Click">
-            <TextBlock Text="Dodaj krawędź" TextWrapping="Wrap" TextAlignment="Center"/>
+            <TextBlock Text="Dodaj krawędzie" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
         <Button x:Name="AddVertex" HorizontalAlignment="Left" Height="90" Margin="1143,50,0,0" VerticalAlignment="Top" Width="90" Click="AddVertex_Click">
-            <TextBlock Text="Dodaj wierzchołek" TextWrapping="Wrap" TextAlignment="Center"/>
+            <TextBlock Text="Dodaj wierzchołki" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
-        <Button x:Name="DeleteElements" HorizontalAlignment="Left" Height="90" Margin="1143,275,0,0" VerticalAlignment="Top" Width="90" Click="DeleteElements_Click">
+        <Button x:Name="DeleteElements" HorizontalAlignment="Left" Height="90" Margin="1143,270,0,0" VerticalAlignment="Top" Width="90" Click="DeleteElements_Click">
             <TextBlock Text="Usuń wybrane elementy" TextWrapping="Wrap" TextAlignment="Center" />
+        </Button>
+        <Button x:Name="AddDirectedEdge" HorizontalAlignment="Left" Height="90" Margin="1143,380,0,0" VerticalAlignment="Top" Width="90" Click="AddDirectedEdge_Click">
+            <TextBlock Text="Dodaj krawędzie skierowane" TextWrapping="Wrap" TextAlignment="Center" />
         </Button>
 
 

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wyszukiwanie_mostów_w_grafie.Models
+namespace Wyszukiwanie_mostów_w_grafie
 {
     class Graph
     {
-        List<Vertex> Vertices;  //Lista wierzchołków grafu
+        public List<Vertex> Vertices;  //Lista wierzchołków grafu
 
         public Graph()
         {

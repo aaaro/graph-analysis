@@ -17,7 +17,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         public Ellipse ellipse { get; set; } //rysowana elipsa
         public TextBox textBox { get; set; } //rysowany numer wierzchołka
 
-        public List<Vertex> Neighbours; //Lista sąsaidujących wierzchołków
+        public List<Vertex> Neighbours; //Lista sąsiadujących wierzchołków
 
         public Vertex()
         {
