@@ -13,6 +13,7 @@ namespace Wyszukiwanie_mostów_w_grafie
 {
     public class Vertex : Canvas
     {
+        public double srednica = 50;
         static int count = 0; //licznik wierzchołków
         public Ellipse ellipse { get; set; } //rysowana elipsa
         public TextBox textBox { get; set; } //rysowany numer wierzchołka
@@ -27,18 +28,18 @@ namespace Wyszukiwanie_mostów_w_grafie
             textBox = new TextBox();
             Neighbours = new List<Vertex>();
             //canvas
-            Width = 50;
-            Height = 50;
+            Width = srednica;
+            Height = srednica;
             //elipsa
-            ellipse.Width = 50;
-            ellipse.Height = 50;
+            ellipse.Width = srednica;
+            ellipse.Height = srednica;
             ellipse.Fill = Brushes.White;
             ellipse.Stroke = Brushes.Black;
             ellipse.StrokeThickness = 2;
             Children.Add(ellipse);
             //textbox
-            textBox.Width = 50;
-            textBox.Height = 50;
+            textBox.Width = srednica;
+            textBox.Height = srednica;
             textBox.Background = Brushes.Transparent;
             textBox.BorderThickness = new Thickness(0, 0, 0, 0);
             textBox.Text = Convert.ToString(count);

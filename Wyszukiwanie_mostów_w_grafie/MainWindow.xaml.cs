@@ -53,8 +53,8 @@ namespace Wyszukiwanie_mostów_w_grafie
                 vertex.MouseLeftButtonDown += vertex_MouseLeftButtonDown;
                 //Rysowanie i pozycjonowanie wierzchołka
                 DrawSpace.Children.Add(vertex);
-                Canvas.SetLeft(vertex, e.GetPosition(DrawSpace).X - 25);
-                Canvas.SetTop(vertex, e.GetPosition(DrawSpace).Y - 25);
+                Canvas.SetLeft(vertex, e.GetPosition(DrawSpace).X - (vertex.srednica/2));
+                Canvas.SetTop(vertex, e.GetPosition(DrawSpace).Y - (vertex.srednica / 2));
                 //Dodanie wierzchołka do grafu
                 graph.Vertices.Add(vertex);
             }
@@ -81,9 +81,9 @@ namespace Wyszukiwanie_mostów_w_grafie
 
                     Edge edge;
                     if (directedFlag)
-                        edge = new Edge(tmp, v);
-                    else
                         edge = new Edge(tmp, v, true);
+                    else
+                        edge = new Edge(tmp, v);
                     edge.MouseRightButtonDown += edge_MouseRightButtonDown;
                     edge.MouseLeftButtonDown += edge_MouseLeftButtonDown;
                    
@@ -96,6 +96,7 @@ namespace Wyszukiwanie_mostów_w_grafie
                 {
                     tmp.textBox.Foreground = Brushes.Black;
                     tmp.ellipse.Stroke = Brushes.Black;
+                    tmp = null;
                 }
             }
             if(deleteFlag)
@@ -110,7 +111,12 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             if (deleteFlag)
             {
-                Line l = sender as Line;
+                //najpierw skasuj sąsiadów z listy i krawędź z listy krawędzi, potem wywal linię
+                Edge l = sender as Edge;
+                l.v1.Neighbours.Remove(l.v2);
+                l.v2.Neighbours.Remove(l.v1);
+
+                graph.Edges.Remove(l);
                 DrawSpace.Children.Remove(l);
             }
         }
@@ -119,7 +125,11 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             if (deleteFlag)
             {
-                Line l = sender as Line;
+                Edge l = sender as Edge;
+                l.v1.Neighbours.Remove(l.v2);
+                l.v2.Neighbours.Remove(l.v1);
+
+                graph.Edges.Remove(l);
                 DrawSpace.Children.Remove(l);
             }
         }
@@ -139,6 +149,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             vertexFlag = false;
             deleteFlag = false;
             directedFlag = false;
+            ChangeButtonColors();
         }
         //Obsługa przycisku do rysowania wierzchołków
         private void AddVertex_Click(object sender, RoutedEventArgs e)
@@ -147,6 +158,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             vertexFlag = true;
             deleteFlag = false;
             directedFlag = false;
+            ChangeButtonColors();
         }
         //Obsługa przycisku do usuwania elementów
         private void DeleteElements_Click(object sender, RoutedEventArgs e)
@@ -155,6 +167,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             vertexFlag = false;
             deleteFlag = true;
             directedFlag = false;
+            ChangeButtonColors();
         }
 
         private void AddDirectedEdge_Click(object sender, RoutedEventArgs e)
@@ -163,6 +176,25 @@ namespace Wyszukiwanie_mostów_w_grafie
             vertexFlag = false;
             deleteFlag = false;
             directedFlag = true;
+            ChangeButtonColors();
+        }
+        private void ChangeButtonColors()
+        {
+            //powrót wszystkich przycisków do default
+            AddVertex.ClearValue(BackgroundProperty);
+            AddEdge.ClearValue(BackgroundProperty);
+            DeleteElements.ClearValue(BackgroundProperty);
+            AddDirectedEdge.ClearValue(BackgroundProperty);
+
+            //zmiana koloru odpowiedniego przycisku
+            if (vertexFlag)
+                AddVertex.Background = Brushes.LightGreen;
+            if (edgeFlag)
+                AddEdge.Background = Brushes.LightGreen;
+            if (deleteFlag)
+                DeleteElements.Background = Brushes.LightGreen;
+            if (directedFlag)
+                AddDirectedEdge.Background = Brushes.LightGreen;
         }
     }
 }
