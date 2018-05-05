@@ -18,6 +18,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         bool directed;
         public Edge(Vertex v1, Vertex v2, bool directed = false)
         {
+            
             this.v1 = v1;
             this.v2 = v2;
             this.directed = directed;
@@ -30,6 +31,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             line.Y2 = GetTop(v2) + 25;
             line.Stroke = Brushes.Black;
             line.StrokeThickness = 8;
+            line.Margin = new Thickness(25);
             Children.Add(line);
         }
     }

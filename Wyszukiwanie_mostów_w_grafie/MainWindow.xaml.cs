@@ -81,9 +81,9 @@ namespace Wyszukiwanie_mostów_w_grafie
 
                     Edge edge;
                     if (directedFlag)
-                        edge = new Edge(tmp, v);
-                    else
                         edge = new Edge(tmp, v, true);
+                    else
+                        edge = new Edge(tmp, v);
                     edge.MouseRightButtonDown += edge_MouseRightButtonDown;
                     edge.MouseLeftButtonDown += edge_MouseLeftButtonDown;
                    
@@ -111,7 +111,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             if (deleteFlag)
             {
-                Line l = sender as Line;
+                Canvas l = sender as Canvas;
                 DrawSpace.Children.Remove(l);
             }
         }
@@ -120,7 +120,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             if (deleteFlag)
             {
-                Line l = sender as Line;
+                Canvas l = sender as Canvas;
                 DrawSpace.Children.Remove(l);
             }
         }
