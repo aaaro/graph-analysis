@@ -72,31 +72,53 @@ namespace Wyszukiwanie_mostów_w_grafie
         //tablicę [x1, y1, x2, y2]
         public double[] SzukajPrzeciec(Line l)
         {
-            //y = ax + b, to są a i b z równania prostej
-            double prostaA = (l.Y2 - l.Y1) / (l.X2 - l.X1);
-            double prostaB = ((l.Y1 * l.X2) - (l.X1 * l.Y2)) / (l.X2 - l.X1);
-            //a to a, b i c z równania, które wyszło ostatecznie dla obszaru X1 Y1
-            double rownanieA = Math.Pow(prostaA, 2) + 1;
-            double rownanieB1 = (-2 * l.X1) + (2 * prostaA * prostaB) - (2 * prostaA * l.Y1);
-            double rownanieC1 = Math.Pow(l.X1, 2) - (2 * prostaB * l.Y1) + Math.Pow(prostaB, 2) + Math.Pow(l.Y1, 2) - Math.Pow(v1.srednica / 2, 2);
-            //dla obszaru X2 Y2
-            double rownanieB2 = (-2 * l.X2) + (2 * prostaA * prostaB) - (2 * prostaA * l.Y2);
-            double rownanieC2 = Math.Pow(l.X2, 2) - (2 * prostaB * l.Y2) + Math.Pow(prostaB, 2) + Math.Pow(l.Y2, 2) - Math.Pow(v1.srednica / 2, 2);
-            //delta i pierwiastek
-            double pierwDelty1 = PierwDelty(rownanieA, rownanieB1, rownanieC1);
-            double pierwDelty2 = PierwDelty(rownanieA, rownanieB2, rownanieC2);
-            //odpowiedni x, czyli punkt szukany. Oba punkty dla obu okręgów
-            double rozwiazanieX1 = rozwiazanieX(rownanieA, rownanieB1, pierwDelty1, line);
-            double rozwiazanieX2 = rozwiazanieX(rownanieA, rownanieB2, pierwDelty2, line);
-            //z tego współrzędna y do tych punktów
-            double rozwiazanieY1 = (prostaA * rozwiazanieX1) + prostaB;
-            double rozwiazanieY2 = (prostaA * rozwiazanieX2) + prostaB;
-
             double[] WspolrzednePunktow = new double[4];
-            WspolrzednePunktow[0] = rozwiazanieX1;
-            WspolrzednePunktow[1] = rozwiazanieY1;
-            WspolrzednePunktow[2] = rozwiazanieX2;
-            WspolrzednePunktow[3] = rozwiazanieY2;
+            //jeśli są dokładnie jeden nad drugim, czyli nie jest wykres funkcji, to sposób niżej nie działa
+            if (l.X1 == l.X2)
+            {
+                WspolrzednePunktow[0] = l.X1;
+                WspolrzednePunktow[2] = l.X2;
+
+                if (l.Y1 > l.Y2)
+                {
+                    WspolrzednePunktow[1] = l.Y1 - (v1.srednica / 2);
+                    WspolrzednePunktow[3] = l.Y2 + (v1.srednica / 2);
+                }
+                else
+                {
+                    WspolrzednePunktow[1] = l.Y1 + (v1.srednica / 2);
+                    WspolrzednePunktow[3] = l.Y2 - (v1.srednica / 2);
+                }
+
+            }
+            //dla wszystkich innych przypadków
+            else
+            {
+                //y = ax + b, to są a i b z równania prostej
+                double prostaA = (l.Y2 - l.Y1) / (l.X2 - l.X1);
+                double prostaB = ((l.Y1 * l.X2) - (l.X1 * l.Y2)) / (l.X2 - l.X1);
+                //a to a, b i c z równania, które wyszło ostatecznie dla obszaru X1 Y1
+                double rownanieA = Math.Pow(prostaA, 2) + 1;
+                double rownanieB1 = (-2 * l.X1) + (2 * prostaA * prostaB) - (2 * prostaA * l.Y1);
+                double rownanieC1 = Math.Pow(l.X1, 2) - (2 * prostaB * l.Y1) + Math.Pow(prostaB, 2) + Math.Pow(l.Y1, 2) - Math.Pow(v1.srednica / 2, 2);
+                //dla obszaru X2 Y2
+                double rownanieB2 = (-2 * l.X2) + (2 * prostaA * prostaB) - (2 * prostaA * l.Y2);
+                double rownanieC2 = Math.Pow(l.X2, 2) - (2 * prostaB * l.Y2) + Math.Pow(prostaB, 2) + Math.Pow(l.Y2, 2) - Math.Pow(v1.srednica / 2, 2);
+                //delta i pierwiastek
+                double pierwDelty1 = PierwDelty(rownanieA, rownanieB1, rownanieC1);
+                double pierwDelty2 = PierwDelty(rownanieA, rownanieB2, rownanieC2);
+                //odpowiedni x, czyli punkt szukany. Oba punkty dla obu okręgów
+                double rozwiazanieX1 = rozwiazanieX(rownanieA, rownanieB1, pierwDelty1, line);
+                double rozwiazanieX2 = rozwiazanieX(rownanieA, rownanieB2, pierwDelty2, line);
+                //z tego współrzędna y do tych punktów
+                double rozwiazanieY1 = (prostaA * rozwiazanieX1) + prostaB;
+                double rozwiazanieY2 = (prostaA * rozwiazanieX2) + prostaB;
+
+                WspolrzednePunktow[0] = rozwiazanieX1;
+                WspolrzednePunktow[1] = rozwiazanieY1;
+                WspolrzednePunktow[2] = rozwiazanieX2;
+                WspolrzednePunktow[3] = rozwiazanieY2;
+            }
 
             return WspolrzednePunktow;
         }
