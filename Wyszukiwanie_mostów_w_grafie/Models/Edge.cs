@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -15,49 +16,40 @@ namespace Wyszukiwanie_mostów_w_grafie
         public Vertex v1;
         public Vertex v2;
         Line line;
-        bool directed;
-        public Edge(Vertex v1, Vertex v2, bool directed = false)
+
+        public Edge(Vertex v1, Vertex v2)
         {
-            
             this.v1 = v1;
             this.v2 = v2;
-            this.directed = directed;
             //Rysowanie linii pomiędzy wierzchołkami
 
-            //jeśli jest nieskierowana
-            if (!directed)
+            //dodaj linię tylko jeśli jeszcze jej nie ma
+            if (!v1.Neighbours.Contains(v2))
             {
-                //dodaj linię tylko jeśli jeszcze jej nie ma
-                if (!v1.Neighbours.Contains(v2))
+                //dodanie sąsiadów do listy
+                v1.Neighbours.Add(v2);
+                v2.Neighbours.Add(v1);
+
+                //i dopiero rysowanie linii
+                line = new Line();
+                line.X1 = GetLeft(v1) + (v1.srednica / 2);
+                line.Y1 = GetTop(v1) + (v1.srednica / 2);
+                line.X2 = GetLeft(v2) + (v1.srednica / 2);
+                line.Y2 = GetTop(v2) + (v1.srednica / 2);
+                line.Stroke = Brushes.Black;
+                line.StrokeThickness = 8;
+
+                //zmiana na współrzędne krawędzi wierzchołka, jeśli na siebie nie nachodzą. Jak nachodzą, to rysuje od środka
+                if (Math.Abs(line.X1 - line.X2) > v1.srednica || Math.Abs(line.Y1 - line.Y2) > v1.srednica)
                 {
-                    //dodanie sąsiadów do listy
-                    v1.Neighbours.Add(v2);
-                    v2.Neighbours.Add(v1);
-
-                    //i dopiero rysowanie linii
-                    line = new Line();
-                    line.X1 = GetLeft(v1) + (v1.srednica / 2);
-                    line.Y1 = GetTop(v1) + (v1.srednica / 2);
-                    line.X2 = GetLeft(v2) + (v1.srednica / 2);
-                    line.Y2 = GetTop(v2) + (v1.srednica / 2);
-                    line.Stroke = Brushes.Black;
-                    line.StrokeThickness = 8;
-
-                    //zmiana na współrzędne krawędzi wierzchołka, jeśli na siebie nie nachodzą. Jak nachodzą, to rysuje od środka
-                    if (Math.Abs(line.X1 - line.X2) > v1.srednica || Math.Abs(line.Y1 - line.Y2) > v1.srednica)
-                    {
-                        double[] wspolrzedne = SzukajPrzeciec(line);
-                        line.X1 = wspolrzedne[0];
-                        line.Y1 = wspolrzedne[1];
-                        line.X2 = wspolrzedne[2];
-                        line.Y2 = wspolrzedne[3];
-                    }
-                    Children.Add(line);
-
+                    double[] wspolrzedne = SzukajPrzeciec(line);
+                    line.X1 = wspolrzedne[0];
+                    line.Y1 = wspolrzedne[1];
+                    line.X2 = wspolrzedne[2];
+                    line.Y2 = wspolrzedne[3];
                 }
+                Children.Add(line);
             }
-
-
         }
 
         //FUCK THAT SHIT DOWN THERE, TOO MUCH MATH

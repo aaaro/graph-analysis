@@ -17,7 +17,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             Vertices = new List<Vertex>();
             Edges = new List<Edge>();
         }
-        public void Remove(Vertex v)
+        /*public void Remove(Vertex v)
         {
             Vertices.Remove(v);
             for(int i = 0; i < Edges.Count; i++)
@@ -27,6 +27,6 @@ namespace Wyszukiwanie_mostów_w_grafie
                     Edges.Remove(Edges[i]);
                 }
             }
-        }
+        }*/
     }
 }

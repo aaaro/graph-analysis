@@ -23,10 +23,5 @@
         <Button x:Name="DeleteElements" HorizontalAlignment="Left" Height="90" Margin="1143,270,0,0" VerticalAlignment="Top" Width="90" Click="DeleteElements_Click">
             <TextBlock Text="Usuń wybrane elementy" TextWrapping="Wrap" TextAlignment="Center" />
         </Button>
-        <Button x:Name="AddDirectedEdge" HorizontalAlignment="Left" Height="90" Margin="1143,380,0,0" VerticalAlignment="Top" Width="90" Click="AddDirectedEdge_Click">
-            <TextBlock Text="Dodaj krawędzie skierowane" TextWrapping="Wrap" TextAlignment="Center" />
-        </Button>
-
-
     </Grid>
 </Window>
