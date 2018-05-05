@@ -53,8 +53,8 @@ namespace Wyszukiwanie_mostów_w_grafie
                 vertex.MouseLeftButtonDown += vertex_MouseLeftButtonDown;
                 //Rysowanie i pozycjonowanie wierzchołka
                 DrawSpace.Children.Add(vertex);
-                Canvas.SetLeft(vertex, e.GetPosition(DrawSpace).X - 25);
-                Canvas.SetTop(vertex, e.GetPosition(DrawSpace).Y - 25);
+                Canvas.SetLeft(vertex, e.GetPosition(DrawSpace).X - (vertex.srednica/2));
+                Canvas.SetTop(vertex, e.GetPosition(DrawSpace).Y - (vertex.srednica / 2));
                 //Dodanie wierzchołka do grafu
                 graph.Vertices.Add(vertex);
             }
@@ -111,7 +111,12 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             if (deleteFlag)
             {
-                Canvas l = sender as Canvas;
+                //najpierw skasuj sąsiadów z listy i krawędź z listy krawędzi, potem wywal linię
+                Edge l = sender as Edge;
+                l.v1.Neighbours.Remove(l.v2);
+                l.v2.Neighbours.Remove(l.v1);
+
+                graph.Edges.Remove(l);
                 DrawSpace.Children.Remove(l);
             }
         }
@@ -120,7 +125,11 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             if (deleteFlag)
             {
-                Canvas l = sender as Canvas;
+                Edge l = sender as Edge;
+                l.v1.Neighbours.Remove(l.v2);
+                l.v2.Neighbours.Remove(l.v1);
+
+                graph.Edges.Remove(l);
                 DrawSpace.Children.Remove(l);
             }
         }
