@@ -31,7 +31,6 @@ namespace Wyszukiwanie_mostów_w_grafie
             line.Y2 = GetTop(v2) + 25;
             line.Stroke = Brushes.Black;
             line.StrokeThickness = 8;
-            line.Margin = new Thickness(25);
             Children.Add(line);
         }
     }
