@@ -96,6 +96,7 @@ namespace Wyszukiwanie_mostów_w_grafie
                 {
                     tmp.textBox.Foreground = Brushes.Black;
                     tmp.ellipse.Stroke = Brushes.Black;
+                    tmp = null;
                 }
             }
             if(deleteFlag)
@@ -139,6 +140,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             vertexFlag = false;
             deleteFlag = false;
             directedFlag = false;
+            ChangeButtonColors();
         }
         //Obsługa przycisku do rysowania wierzchołków
         private void AddVertex_Click(object sender, RoutedEventArgs e)
@@ -147,6 +149,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             vertexFlag = true;
             deleteFlag = false;
             directedFlag = false;
+            ChangeButtonColors();
         }
         //Obsługa przycisku do usuwania elementów
         private void DeleteElements_Click(object sender, RoutedEventArgs e)
@@ -155,6 +158,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             vertexFlag = false;
             deleteFlag = true;
             directedFlag = false;
+            ChangeButtonColors();
         }
 
         private void AddDirectedEdge_Click(object sender, RoutedEventArgs e)
@@ -163,6 +167,25 @@ namespace Wyszukiwanie_mostów_w_grafie
             vertexFlag = false;
             deleteFlag = false;
             directedFlag = true;
+            ChangeButtonColors();
+        }
+        private void ChangeButtonColors()
+        {
+            //powrót wszystkich przycisków do default
+            AddVertex.ClearValue(BackgroundProperty);
+            AddEdge.ClearValue(BackgroundProperty);
+            DeleteElements.ClearValue(BackgroundProperty);
+            AddDirectedEdge.ClearValue(BackgroundProperty);
+
+            //zmiana koloru odpowiedniego przycisku
+            if (vertexFlag)
+                AddVertex.Background = Brushes.LightGreen;
+            if (edgeFlag)
+                AddEdge.Background = Brushes.LightGreen;
+            if (deleteFlag)
+                DeleteElements.Background = Brushes.LightGreen;
+            if (directedFlag)
+                AddDirectedEdge.Background = Brushes.LightGreen;
         }
     }
 }
