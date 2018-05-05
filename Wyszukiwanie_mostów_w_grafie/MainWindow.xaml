@@ -7,13 +7,21 @@
         mc:Ignorable="d"
         Title="Poszukiwanie mostów" Height="720" Width="1280" Name="window">
     <Grid>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="auto" Background="#FFBFB9B9">
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="1272" Background="#FFBFB9B9">
             <MenuItem Header="Input">
-                <MenuItem Header="Ręcznie"/>
+                <MenuItem Header="Z macierzy sąsiedztwa"/>
             </MenuItem>
         </Menu>
-        <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="667" Margin="0,22,0,0" VerticalAlignment="Top" Width="1272" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White"/>
-
-
+        <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="667" Margin="0,22,0,0" VerticalAlignment="Top" Width="1102" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White"/>
+        <DockPanel x:Name="ToolBar" HorizontalAlignment="Center" Height="668" LastChildFill="False" Margin="1102,22,0,0" VerticalAlignment="Top" Width="170" Background="DarkGray"/>
+        <Button x:Name="AddEdge" HorizontalAlignment="Left" Height="90" Margin="1143,160,0,0" VerticalAlignment="Top" Width="90" Click="AddEdge_Click">
+            <TextBlock Text="Dodaj krawędzie" TextWrapping="Wrap" TextAlignment="Center"/>
+        </Button>
+        <Button x:Name="AddVertex" HorizontalAlignment="Left" Height="90" Margin="1143,50,0,0" VerticalAlignment="Top" Width="90" Click="AddVertex_Click">
+            <TextBlock Text="Dodaj wierzchołki" TextWrapping="Wrap" TextAlignment="Center"/>
+        </Button>
+        <Button x:Name="DeleteElements" HorizontalAlignment="Left" Height="90" Margin="1143,270,0,0" VerticalAlignment="Top" Width="90" Click="DeleteElements_Click">
+            <TextBlock Text="Usuń wybrane elementy" TextWrapping="Wrap" TextAlignment="Center" />
+        </Button>
     </Grid>
 </Window>
