@@ -81,6 +81,7 @@ namespace Wyszukiwanie_mostów_w_grafie
                     tmp.ellipse.Stroke = Brushes.Black;
 
                     Edge edge = new Edge(tmp, v);
+                    //dodanie możliwości kliknięcia na krawędź
                     edge.MouseLeftButtonDown += edge_MouseLeftButtonDown;
                    
                     DrawSpace.Children.Add(edge);
@@ -135,37 +136,40 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             if(moveFlag)
             {
-                DrawSpace.MouseMove -= DrawSpace_MouseMove;
-                //ustalam, które krawędzie muszę przerysować
-                List<Edge> edgesToRedraw = new List<Edge>();
-                foreach (var item in tmp.Neighbours)
-                {
-                    Edge edge = graph.GetEdge(tmp, item);
-                    edgesToRedraw.Add(edge);
-                }
-                foreach (var item in edgesToRedraw)
-                {
-                    //usuwam krawędź z rysunku
-                    DrawSpace.Children.Remove(item);
-                    //usuwam sąsiedztwo wierzchołków
-                    item.v1.Neighbours.Remove(item.v2);
-                    item.v2.Neighbours.Remove(item.v1);
-                    graph.Edges.Remove(item);
-                    //Tworzę ponownie krawędź, co ponownie utworzy sąsiedztwo
-                    Edge edge = new Edge(item.v1, item.v2);
-                    //rysuję ponownie krawędź
-                    DrawSpace.Children.Add(edge);
-                    graph.Edges.Add(edge);
-                    Console.WriteLine();
-                }
+                DrawSpace.MouseMove -= DrawSpace_MouseMove;              
                 tmp = null;
             }
         }
         //przesuwanie wierzchołka
         private void DrawSpace_MouseMove(object sender, MouseEventArgs e)
         {
+            //przesunięcie samego wierzchołka
             Canvas.SetLeft(tmp, e.GetPosition(DrawSpace).X - (tmp.srednica / 2));
             Canvas.SetTop(tmp, e.GetPosition(DrawSpace).Y - (tmp.srednica / 2));
+
+            //ustalam, które krawędzie muszę przerysować
+            List<Edge> edgesToRedraw = new List<Edge>();
+            foreach (var item in tmp.Neighbours)
+            {
+                Edge edge = graph.GetEdge(tmp, item);
+                edgesToRedraw.Add(edge);
+            }
+            foreach (var item in edgesToRedraw)
+            {
+                //usuwam krawędź z rysunku
+                DrawSpace.Children.Remove(item);
+                //usuwam sąsiedztwo wierzchołków
+                item.v1.Neighbours.Remove(item.v2);
+                item.v2.Neighbours.Remove(item.v1);
+                graph.Edges.Remove(item);
+                //Tworzę ponownie krawędź, co ponownie utworzy sąsiedztwo
+                Edge edge = new Edge(item.v1, item.v2);
+                edge.MouseLeftButtonDown += edge_MouseLeftButtonDown;
+                //rysuję ponownie krawędź
+                DrawSpace.Children.Add(edge);
+                graph.Edges.Add(edge);
+                Console.WriteLine();
+            }
         }
 
         //Wciśnięcie lewego przycisku myszy na narysowanej krawędzi
