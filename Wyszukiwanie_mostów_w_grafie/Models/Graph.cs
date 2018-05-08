@@ -17,16 +17,15 @@ namespace Wyszukiwanie_mostów_w_grafie
             Vertices = new List<Vertex>();
             Edges = new List<Edge>();
         }
-        /*public void Remove(Vertex v)
+        public override string ToString()
         {
-            Vertices.Remove(v);
-            for(int i = 0; i < Edges.Count; i++)
+            string zwrot = "";
+            foreach(var item in Vertices)
             {
-                if(Edges[i].v1 == v || Edges[i].v2 == v)
-                {
-                    Edges.Remove(Edges[i]);
-                }
+                zwrot += item.ToString() + Environment.NewLine;
             }
-        }*/
+
+            return zwrot;
+        }
     }
 }
