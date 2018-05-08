@@ -108,6 +108,10 @@ namespace Wyszukiwanie_mostów_w_grafie
                 }
                 foreach(Edge item in edgeToDelete)
                 {
+                    //usuwam sąsiedztwo wierzchołków
+                    item.v1.Neighbours.Remove(item.v2);
+                    item.v2.Neighbours.Remove(item.v1);
+                    //usuwam krawędź z grafy i rysunku
                     graph.Edges.Remove(item);
                     DrawSpace.Children.Remove(item);
                 }
@@ -152,6 +156,9 @@ namespace Wyszukiwanie_mostów_w_grafie
             vertexFlag = false;
             deleteFlag = true;
             ChangeButtonColors();
+
+            //Do debugowania
+            Console.WriteLine(graph.ToString());
         }
         private void ChangeButtonColors()
         {

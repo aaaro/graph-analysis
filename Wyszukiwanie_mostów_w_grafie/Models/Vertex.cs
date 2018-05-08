@@ -14,6 +14,7 @@ namespace Wyszukiwanie_mostów_w_grafie
     public class Vertex : Canvas
     {
         public double srednica = 50;
+        public int id;
         static int count = 0; //licznik wierzchołków
         public Ellipse ellipse { get; set; } //rysowana elipsa
         public TextBox textBox { get; set; } //rysowany numer wierzchołka
@@ -24,6 +25,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             //Deklaracje
             count++;
+            id = count;
             ellipse = new Ellipse();
             textBox = new TextBox();
             Neighbours = new List<Vertex>();
@@ -50,6 +52,15 @@ namespace Wyszukiwanie_mostów_w_grafie
             textBox.Cursor = Cursors.Pen;
             textBox.IsHitTestVisible = false;
             Children.Add(textBox);          
+        }
+        public override string ToString()
+        {
+            string neighbours = "";
+            foreach(var item in Neighbours)
+            {
+                neighbours += " {" + item.id + "},";
+            }
+            return id + ": " + neighbours;
         }
     }
 }
