@@ -211,9 +211,6 @@ namespace Wyszukiwanie_mostów_w_grafie
             deleteFlag = true;
             moveFlag = false;
             ChangeButtonColors();
-
-            //Do debugowania
-            Console.WriteLine(graph.ToString());
         }
         private void ChangeButtonColors()
         {
@@ -223,15 +220,59 @@ namespace Wyszukiwanie_mostów_w_grafie
             DeleteElements.ClearValue(BackgroundProperty);
             MoveElements.ClearValue(BackgroundProperty);
 
-            //zmiana koloru odpowiedniego przycisku
+            //zmiana koloru odpowiedniego przycisku oraz typu kursora nad poszczególnymi obiektami
             if (vertexFlag)
+            {
                 AddVertex.Background = Brushes.LightGreen;
+                DrawSpace.Cursor = Cursors.Pen;
+                foreach (var item in graph.Edges)
+                {
+                    item.Cursor = Cursors.Arrow;
+                }
+                foreach (var item in graph.Vertices)
+                {
+                    item.Cursor = Cursors.Arrow;
+                }
+            }
             if (edgeFlag)
+            {
                 AddEdge.Background = Brushes.LightGreen;
+                DrawSpace.Cursor = Cursors.Arrow;
+                foreach (var item in graph.Edges)
+                {
+                    item.Cursor = Cursors.Arrow;
+                }
+                foreach (var item in graph.Vertices)
+                {
+                    item.Cursor = Cursors.Hand;
+                }
+            }
             if (deleteFlag)
+            {
                 DeleteElements.Background = Brushes.LightGreen;
+                DrawSpace.Cursor = Cursors.Arrow;
+                foreach (var item in graph.Edges)
+                {
+                    item.Cursor = Cursors.No;
+                }
+                foreach (var item in graph.Vertices)
+                {
+                    item.Cursor = Cursors.No;
+                }
+            }
             if (moveFlag)
+            {
                 MoveElements.Background = Brushes.LightGreen;
+                DrawSpace.Cursor = Cursors.Arrow;
+                foreach(var item in graph.Edges)
+                {
+                    item.Cursor = Cursors.Arrow;
+                }
+                foreach (var item in graph.Vertices)
+                {
+                    item.Cursor = Cursors.SizeAll;
+                }
+            }
         }
 
         private void MoveElements_Click(object sender, RoutedEventArgs e)
