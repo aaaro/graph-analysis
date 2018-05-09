@@ -24,8 +24,18 @@ namespace Wyszukiwanie_mostów_w_grafie
             {
                 zwrot += item.ToString() + Environment.NewLine;
             }
-
             return zwrot;
+        }
+        public Edge GetEdge(Vertex v1, Vertex v2)
+        {
+            foreach(var item in Edges)
+            {
+                if((v1 == item.v1 && v2 == item.v2)|| (v1 == item.v2 && v2 == item.v1))
+                {
+                    return item;
+                }
+            }
+            return null;
         }
     }
 }

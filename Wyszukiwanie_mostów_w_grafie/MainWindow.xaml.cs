@@ -25,6 +25,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         public bool edgeFlag;
         public bool vertexFlag;
         public bool deleteFlag;
+        public bool moveFlag;
 
         //wskaźnik pokazujący na ostatni wybrany wierzchołek (wykorzystywany w tworzeniu krawędzi)
         Vertex tmp;
@@ -48,6 +49,7 @@ namespace Wyszukiwanie_mostów_w_grafie
                 Vertex vertex = new Vertex();
                 //Dodanie do klasy Vertex eventów związanych z myszką
                 vertex.MouseLeftButtonDown += vertex_MouseLeftButtonDown;
+                vertex.MouseLeftButtonUp += vertex_MouseLeftButtonUp;
                 //Rysowanie i pozycjonowanie wierzchołka
                 DrawSpace.Children.Add(vertex);
                 Canvas.SetLeft(vertex, e.GetPosition(DrawSpace).X - (vertex.srednica/2));
@@ -56,6 +58,7 @@ namespace Wyszukiwanie_mostów_w_grafie
                 graph.Vertices.Add(vertex);
             }
         }
+
         //Wciśnięcie lewego przycisku myszy na narysowanym wierzchołku
         private void vertex_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -78,6 +81,7 @@ namespace Wyszukiwanie_mostów_w_grafie
                     tmp.ellipse.Stroke = Brushes.Black;
 
                     Edge edge = new Edge(tmp, v);
+                    //dodanie możliwości kliknięcia na krawędź
                     edge.MouseLeftButtonDown += edge_MouseLeftButtonDown;
                    
                     DrawSpace.Children.Add(edge);
@@ -91,6 +95,13 @@ namespace Wyszukiwanie_mostów_w_grafie
                     tmp.ellipse.Stroke = Brushes.Black;
                     tmp = null;
                 }
+            }
+            //przesuwanie wierzchołków
+            if(moveFlag)
+            {
+                Vertex v = sender as Vertex;
+                tmp = v;
+                DrawSpace.MouseMove += DrawSpace_MouseMove;
             }
             //przypadek usuwania elementów
             if(deleteFlag)
@@ -120,6 +131,47 @@ namespace Wyszukiwanie_mostów_w_grafie
                 DrawSpace.Children.Remove(toDelete);
             }
         }
+        //po upuszczeniu wierzchołka (przesunięcie)
+        private void vertex_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if(moveFlag)
+            {
+                DrawSpace.MouseMove -= DrawSpace_MouseMove;              
+                tmp = null;
+            }
+        }
+        //przesuwanie wierzchołka
+        private void DrawSpace_MouseMove(object sender, MouseEventArgs e)
+        {
+            //przesunięcie samego wierzchołka
+            Canvas.SetLeft(tmp, e.GetPosition(DrawSpace).X - (tmp.srednica / 2));
+            Canvas.SetTop(tmp, e.GetPosition(DrawSpace).Y - (tmp.srednica / 2));
+
+            //ustalam, które krawędzie muszę przerysować
+            List<Edge> edgesToRedraw = new List<Edge>();
+            foreach (var item in tmp.Neighbours)
+            {
+                Edge edge = graph.GetEdge(tmp, item);
+                edgesToRedraw.Add(edge);
+            }
+            foreach (var item in edgesToRedraw)
+            {
+                //usuwam krawędź z rysunku
+                DrawSpace.Children.Remove(item);
+                //usuwam sąsiedztwo wierzchołków
+                item.v1.Neighbours.Remove(item.v2);
+                item.v2.Neighbours.Remove(item.v1);
+                graph.Edges.Remove(item);
+                //Tworzę ponownie krawędź, co ponownie utworzy sąsiedztwo
+                Edge edge = new Edge(item.v1, item.v2);
+                edge.MouseLeftButtonDown += edge_MouseLeftButtonDown;
+                //rysuję ponownie krawędź
+                DrawSpace.Children.Add(edge);
+                graph.Edges.Add(edge);
+                Console.WriteLine();
+            }
+        }
+
         //Wciśnięcie lewego przycisku myszy na narysowanej krawędzi
         private void edge_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -139,6 +191,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             edgeFlag = true;
             vertexFlag = false;
             deleteFlag = false;
+            moveFlag = false;
             ChangeButtonColors();
         }
         //Obsługa przycisku do rysowania wierzchołków
@@ -147,6 +200,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             edgeFlag = false;
             vertexFlag = true;
             deleteFlag = false;
+            moveFlag = false;
             ChangeButtonColors();
         }
         //Obsługa przycisku do usuwania elementów
@@ -155,10 +209,8 @@ namespace Wyszukiwanie_mostów_w_grafie
             edgeFlag = false;
             vertexFlag = false;
             deleteFlag = true;
+            moveFlag = false;
             ChangeButtonColors();
-
-            //Do debugowania
-            Console.WriteLine(graph.ToString());
         }
         private void ChangeButtonColors()
         {
@@ -166,14 +218,70 @@ namespace Wyszukiwanie_mostów_w_grafie
             AddVertex.ClearValue(BackgroundProperty);
             AddEdge.ClearValue(BackgroundProperty);
             DeleteElements.ClearValue(BackgroundProperty);
+            MoveElements.ClearValue(BackgroundProperty);
 
-            //zmiana koloru odpowiedniego przycisku
+            //zmiana koloru odpowiedniego przycisku oraz typu kursora nad poszczególnymi obiektami
             if (vertexFlag)
+            {
                 AddVertex.Background = Brushes.LightGreen;
+                DrawSpace.Cursor = Cursors.Pen;
+                foreach (var item in graph.Edges)
+                {
+                    item.Cursor = Cursors.Arrow;
+                }
+                foreach (var item in graph.Vertices)
+                {
+                    item.Cursor = Cursors.Arrow;
+                }
+            }
             if (edgeFlag)
+            {
                 AddEdge.Background = Brushes.LightGreen;
+                DrawSpace.Cursor = Cursors.Arrow;
+                foreach (var item in graph.Edges)
+                {
+                    item.Cursor = Cursors.Arrow;
+                }
+                foreach (var item in graph.Vertices)
+                {
+                    item.Cursor = Cursors.Hand;
+                }
+            }
             if (deleteFlag)
+            {
                 DeleteElements.Background = Brushes.LightGreen;
+                DrawSpace.Cursor = Cursors.Arrow;
+                foreach (var item in graph.Edges)
+                {
+                    item.Cursor = Cursors.No;
+                }
+                foreach (var item in graph.Vertices)
+                {
+                    item.Cursor = Cursors.No;
+                }
+            }
+            if (moveFlag)
+            {
+                MoveElements.Background = Brushes.LightGreen;
+                DrawSpace.Cursor = Cursors.Arrow;
+                foreach(var item in graph.Edges)
+                {
+                    item.Cursor = Cursors.Arrow;
+                }
+                foreach (var item in graph.Vertices)
+                {
+                    item.Cursor = Cursors.SizeAll;
+                }
+            }
+        }
+
+        private void MoveElements_Click(object sender, RoutedEventArgs e)
+        {
+            edgeFlag = false;
+            vertexFlag = false;
+            deleteFlag = false;
+            moveFlag = true;
+            ChangeButtonColors();
         }
     }
 }

@@ -51,6 +51,10 @@ namespace Wyszukiwanie_mostów_w_grafie
                 Children.Add(line);
             }
         }
+        public override string ToString()
+        {
+            return "{" + v1.ToString() + v2.ToString() + "}";
+        }
 
         //FUCK THAT SHIT DOWN THERE, TOO MUCH MATH
 
@@ -59,7 +63,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         //układ równań (x - x1)^2 + (y - y1)^2 = (srednia/2)^2  <to równanie okręgu, potrzeba obu
         //             y = ax + b                               <to prosta, czyli linia
         //z tego wychodzi zajebiście skomplikowane równanie, efekt na dole
-        
+
         //ogólna funkcja, zwraca nowe wierzchołki
         //tablicę [x1, y1, x2, y2]
         public double[] SzukajPrzeciec(Line l)
