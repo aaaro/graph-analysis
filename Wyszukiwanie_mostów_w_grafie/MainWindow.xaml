@@ -13,7 +13,9 @@
             </MenuItem>
         </Menu>
         <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="667" Margin="0,22,0,0" VerticalAlignment="Top" Width="1102" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White"/>
-        <DockPanel x:Name="ToolBar" HorizontalAlignment="Center" Height="668" LastChildFill="False" Margin="1102,22,0,0" VerticalAlignment="Top" Width="170" Background="DarkGray"/>
+        <DockPanel x:Name="ToolBar" HorizontalAlignment="Center" Height="668" LastChildFill="False" Margin="1102,22,0,0" VerticalAlignment="Top" Width="170" Background="DarkGray">
+            <Button x:Name="FindBridgesButton" Content="Wyszukaj mosty" Height="154" VerticalAlignment="Top" Width="170" Margin="0,514,0,0" FontSize="16" Click="FindBridgesButton_Click"/>
+        </DockPanel>
         <Button x:Name="AddEdge" HorizontalAlignment="Left" Height="90" Margin="1143,160,0,0" VerticalAlignment="Top" Width="90" Click="AddEdge_Click">
             <TextBlock Text="Dodaj krawędzie" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>

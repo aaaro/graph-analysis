@@ -283,5 +283,10 @@ namespace Wyszukiwanie_mostów_w_grafie
             moveFlag = true;
             ChangeButtonColors();
         }
+
+        private void FindBridgesButton_Click(object sender, RoutedEventArgs e)
+        {
+            graph.FindBridges();
+        }
     }
 }

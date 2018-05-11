@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Wyszukiwanie_mostów_w_grafie
 {
@@ -36,6 +37,57 @@ namespace Wyszukiwanie_mostów_w_grafie
                 }
             }
             return null;
+        }
+        public Edge RemoveEdge(Edge e)
+        {
+            e.v1.Neighbours.Remove(e.v2);
+            e.v2.Neighbours.Remove(e.v1);
+            Edges.Remove(e);
+            return e;
+        }
+        public void AddEdge(Edge e)
+        {
+            e.v1.Neighbours.Add(e.v2);
+            e.v2.Neighbours.Add(e.v2);
+            Edges.Add(e);
+        }
+        public void FindBridges()
+        {
+            foreach (var edge in Edges)
+            {
+                Edge tmpEdge = RemoveEdge(edge);
+                int visitedVertices = BFS(1);
+                if(visitedVertices != Vertices.Count)
+                {
+                    edge.Line = Brushes.Red;
+                }
+                AddEdge(tmpEdge);
+            }
+        }
+
+        public int BFS(int s)
+        {
+            bool[] visited = new bool[Vertices.Count+1];
+            Queue<int> q = new Queue<int>();
+            int counter = 0;
+            visited[s] = true;
+            ++counter;
+            q.Enqueue(s);
+
+            while(q.Count > 0)
+            {
+                s = q.Dequeue();
+                foreach (var vertex in Vertices.Find(v => v.id == s).Neighbours)
+                {
+                    if(!visited[vertex.id])
+                    {
+                        visited[vertex.id] = true;
+                        q.Enqueue(vertex.id);
+                        ++counter;
+                    }
+                }
+            }
+            return counter;
         }
     }
 }
