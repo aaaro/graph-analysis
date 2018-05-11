@@ -5,14 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wyszukiwanie_mostów_w_grafie"
         mc:Ignorable="d"
-        Title="Poszukiwanie mostów" Height="720" Width="1280" Name="window">
+        Title="Poszukiwanie mostów" Height="720" Width="1280" Name="window" ResizeMode="CanMinimize">
     <Grid>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="1272" Background="#FFBFB9B9">
             <MenuItem Header="Input">
                 <MenuItem Header="Z macierzy sąsiedztwa"/>
+                <MenuItem Header="Losowy graf"/>
             </MenuItem>
         </Menu>
-        <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="667" Margin="0,22,0,0" VerticalAlignment="Top" Width="1102" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White"/>
+        <Canvas x:Name="ZoomSpace" HorizontalAlignment="Left" Height="667" Margin="0,22,0,0" VerticalAlignment="Top" Width="1102" Background="Black" ClipToBounds="True" MouseWheel="ZoomSpace_MouseWheel">
+            <ScrollViewer x:Name="sv" Height="660" Width="1102" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" PreviewMouseWheel="HandlePreviewMouseWheel">
+                <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="2786" Margin="0,0,0,0" VerticalAlignment="Top" Width="4603" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White">
+                    <Canvas.LayoutTransform>
+                        <ScaleTransform x:Name="st"/>
+                    </Canvas.LayoutTransform>
+                </Canvas>
+            </ScrollViewer>
+        </Canvas>
         <DockPanel x:Name="ToolBar" HorizontalAlignment="Center" Height="668" LastChildFill="False" Margin="1102,22,0,0" VerticalAlignment="Top" Width="170" Background="DarkGray"/>
         <Button x:Name="AddEdge" HorizontalAlignment="Left" Height="90" Margin="1143,160,0,0" VerticalAlignment="Top" Width="90" Click="AddEdge_Click">
             <TextBlock Text="Dodaj krawędzie" TextWrapping="Wrap" TextAlignment="Center"/>
