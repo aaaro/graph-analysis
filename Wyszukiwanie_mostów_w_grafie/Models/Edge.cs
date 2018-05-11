@@ -16,7 +16,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         public Vertex v1;
         public Vertex v2;
         Line line;
-
+        public Line Line { get { return line; } }
         public Edge(Vertex v1, Vertex v2)
         {
             this.v1 = v1;

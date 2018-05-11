@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Wyszukiwanie_mostów_w_grafie
 {
@@ -11,7 +12,6 @@ namespace Wyszukiwanie_mostów_w_grafie
     {
         public List<Vertex> Vertices;  //Lista wierzchołków grafu
         public List<Edge> Edges;  //Lista krawędzi grafu
-
         public Graph()
         {
             Vertices = new List<Vertex>();
@@ -42,12 +42,13 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             foreach (var edge in Edges)
             {
+                edge.Line.Stroke = Brushes.Black;
                 int v1 = edge.v1.id;
                 int v2 = edge.v2.id;
                 int visitedVertices = BFS(1, v1, v2);
                 if(visitedVertices != Vertices.Count)
                 {
-                    edge.SetAsBridge();
+                    edge.Line.Stroke = Brushes.Red;
                 }
             }
         }

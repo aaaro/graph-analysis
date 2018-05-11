@@ -46,7 +46,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             if (vertexFlag)
             {
-                Vertex vertex = new Vertex();
+                Vertex vertex = new Vertex(graph.Vertices.Count+1);
                 //Dodanie do klasy Vertex eventów związanych z myszką
                 vertex.MouseLeftButtonDown += vertex_MouseLeftButtonDown;
                 vertex.MouseLeftButtonUp += vertex_MouseLeftButtonUp;
@@ -291,6 +291,7 @@ namespace Wyszukiwanie_mostów_w_grafie
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.DrawSpace.Children.Clear();
             graph = new Graph();
         }
     }
