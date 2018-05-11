@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Wyszukiwanie_mostów_w_grafie
 {
@@ -38,34 +37,21 @@ namespace Wyszukiwanie_mostów_w_grafie
             }
             return null;
         }
-        public Edge RemoveEdge(Edge e)
-        {
-            e.v1.Neighbours.Remove(e.v2);
-            e.v2.Neighbours.Remove(e.v1);
-            Edges.Remove(e);
-            return e;
-        }
-        public void AddEdge(Edge e)
-        {
-            e.v1.Neighbours.Add(e.v2);
-            e.v2.Neighbours.Add(e.v2);
-            Edges.Add(e);
-        }
+
         public void FindBridges()
         {
             foreach (var edge in Edges)
             {
-                Edge tmpEdge = RemoveEdge(edge);
-                int visitedVertices = BFS(1);
+                int v1 = edge.v1.id;
+                int v2 = edge.v2.id;
+                int visitedVertices = BFS(1, v1, v2);
                 if(visitedVertices != Vertices.Count)
                 {
-                    edge.Line = Brushes.Red;
+                    edge.SetAsBridge();
                 }
-                AddEdge(tmpEdge);
             }
         }
-
-        public int BFS(int s)
+        public int BFS(int s, int v1, int v2)
         {
             bool[] visited = new bool[Vertices.Count+1];
             Queue<int> q = new Queue<int>();
@@ -79,6 +65,8 @@ namespace Wyszukiwanie_mostów_w_grafie
                 s = q.Dequeue();
                 foreach (var vertex in Vertices.Find(v => v.id == s).Neighbours)
                 {
+                    if (s == v1 && vertex.id == v2 )
+                        continue;
                     if(!visited[vertex.id])
                     {
                         visited[vertex.id] = true;
