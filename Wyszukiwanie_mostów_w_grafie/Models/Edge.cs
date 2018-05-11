@@ -16,7 +16,6 @@ namespace Wyszukiwanie_mostów_w_grafie
         public Vertex v1;
         public Vertex v2;
         Line line;
-        public Brush Line { set { line.Stroke = value; } }
 
         public Edge(Vertex v1, Vertex v2)
         {
@@ -55,6 +54,11 @@ namespace Wyszukiwanie_mostów_w_grafie
         public override string ToString()
         {
             return "{" + v1.ToString() + v2.ToString() + "}";
+        }
+
+        public void SetAsBridge()
+        {
+            line.Stroke = Brushes.Red;
         }
 
         //FUCK THAT SHIT DOWN THERE, TOO MUCH MATH
