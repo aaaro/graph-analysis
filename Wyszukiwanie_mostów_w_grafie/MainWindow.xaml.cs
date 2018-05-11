@@ -288,5 +288,10 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             graph.FindBridges();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            graph = new Graph();
+        }
     }
 }
