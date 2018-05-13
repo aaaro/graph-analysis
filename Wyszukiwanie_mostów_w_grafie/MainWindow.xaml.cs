@@ -298,5 +298,40 @@ namespace Wyszukiwanie_mostów_w_grafie
             this.DrawSpace.Children.Clear();
             graph = new Graph();
         }
+
+        private void ZoomSpace_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            Point mousePos = e.GetPosition(DrawSpace);
+            if (e.Delta > 0)
+            {
+                if (st.ScaleX < 1)
+                {
+                    st.ScaleX *= 1.1;
+                    st.ScaleY *= 1.1;
+
+                }
+            }
+            else
+            {
+                if (st.ScaleX > 0.25)
+                {
+                    st.ScaleX *= 1 / 1.1;
+                    st.ScaleY *= 1 / 1.1;
+                }
+            }
+            Console.WriteLine(DrawSpace.Width + " " + DrawSpace.Height + " " + st.ScaleY + " " + st.ScaleX);
+        }
+        private void HandlePreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (sender is ScrollViewer && !e.Handled)
+            {
+                e.Handled = true;
+                var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
+                eventArg.RoutedEvent = UIElement.MouseWheelEvent;
+                eventArg.Source = sender;
+                var parent = ((Control)sender).Parent as UIElement;
+                parent.RaiseEvent(eventArg);
+            }
+        }
     }
 }
