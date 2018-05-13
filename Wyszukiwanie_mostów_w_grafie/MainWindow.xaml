@@ -12,7 +12,15 @@
                 <MenuItem Header="Z macierzy sąsiedztwa"/>
             </MenuItem>
         </Menu>
-        <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="667" Margin="0,22,0,0" VerticalAlignment="Top" Width="1102" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White"/>
+        <Canvas x:Name="ZoomSpace" HorizontalAlignment="Left" Height="667" Margin="0,22,0,0" VerticalAlignment="Top" Width="1102" Background="Black" ClipToBounds="True" MouseWheel="ZoomSpace_MouseWheel">
+            <ScrollViewer x:Name="sv" Height="660" Width="1102" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" PreviewMouseWheel="HandlePreviewMouseWheel">
+                <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="2786" Margin="0,0,0,0" VerticalAlignment="Top" Width="4603" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White">
+                    <Canvas.LayoutTransform>
+                        <ScaleTransform x:Name="st"/>
+                    </Canvas.LayoutTransform>
+                </Canvas>
+            </ScrollViewer>
+        </Canvas>
         <DockPanel x:Name="ToolBar" HorizontalAlignment="Center" Height="668" LastChildFill="False" Margin="1102,22,0,0" VerticalAlignment="Top" Width="170" Background="DarkGray">
             <Button x:Name="FindBridgesButton" Content="Wyszukaj mosty" Height="80" VerticalAlignment="Top" Width="170" Margin="0,588,0,0" FontSize="16" Click="FindBridgesButton_Click"/>
         </DockPanel>
