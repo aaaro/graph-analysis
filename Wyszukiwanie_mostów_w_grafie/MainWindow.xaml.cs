@@ -129,6 +129,15 @@ namespace Wyszukiwanie_mostów_w_grafie
                 //usuwam z grafu i rysunku wierzchołek
                 graph.Vertices.Remove(toDelete);
                 DrawSpace.Children.Remove(toDelete);
+                //zmniejszenie większych wierzchołków o jeden
+                foreach(var item in graph.Vertices)
+                {
+                    if(item.id > toDelete.id)
+                    {
+                        item.id -= 1;
+                        item.textBox.Text = Convert.ToString(item.id);
+                    }
+                }
             }
         }
         //po upuszczeniu wierzchołka (przesunięcie)
