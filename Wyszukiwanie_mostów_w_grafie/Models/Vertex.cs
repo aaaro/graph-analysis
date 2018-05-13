@@ -15,16 +15,15 @@ namespace Wyszukiwanie_mostów_w_grafie
     {
         public double srednica = 50;
         public int id;
-        static int count = 0; //licznik wierzchołków
         public Ellipse ellipse { get; set; } //rysowana elipsa
         public TextBox textBox { get; set; } //rysowany numer wierzchołka
 
         public List<Vertex> Neighbours; //Lista sąsiadujących wierzchołków
 
-        public Vertex()
+        public Vertex(int count)
         {
             //Deklaracje
-            count++;
+            
             id = count;
             ellipse = new Ellipse();
             textBox = new TextBox();
@@ -51,12 +50,12 @@ namespace Wyszukiwanie_mostów_w_grafie
             textBox.IsReadOnly = true;
             textBox.Cursor = Cursors.Pen;
             textBox.IsHitTestVisible = false;
-            Children.Add(textBox);          
+            Children.Add(textBox);
         }
         public override string ToString()
         {
             string neighbours = "";
-            foreach(var item in Neighbours)
+            foreach (var item in Neighbours)
             {
                 neighbours += " {" + item.id + "},";
             }
