@@ -116,7 +116,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         {
             foreach (var edge in Edges.FindAll(e => e.Line.Stroke == Brushes.Red))
             {
-                edge.Line.Stroke = Brushes.Red;
+                edge.Line.Stroke = Brushes.Black;
             }
         }
     }

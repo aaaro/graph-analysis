@@ -193,6 +193,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             deleteFlag = false;
             moveFlag = false;
             ChangeButtonColors();
+            graph.ResetBridges();
         }
         //Obsługa przycisku do rysowania wierzchołków
         private void AddVertex_Click(object sender, RoutedEventArgs e)
@@ -202,6 +203,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             deleteFlag = false;
             moveFlag = false;
             ChangeButtonColors();
+            graph.ResetBridges();
         }
         //Obsługa przycisku do usuwania elementów
         private void DeleteElements_Click(object sender, RoutedEventArgs e)
@@ -211,6 +213,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             deleteFlag = true;
             moveFlag = false;
             ChangeButtonColors();
+            graph.ResetBridges();
         }
         private void ChangeButtonColors()
         {
@@ -282,6 +285,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             deleteFlag = false;
             moveFlag = true;
             ChangeButtonColors();
+            graph.ResetBridges();
         }
 
         private void FindBridgesButton_Click(object sender, RoutedEventArgs e)
