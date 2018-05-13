@@ -101,6 +101,8 @@ namespace Wyszukiwanie_mostów_w_grafie
             {
                 Vertex v = sender as Vertex;
                 tmp = v;
+                tmp.textBox.Foreground = Brushes.Black;
+                tmp.ellipse.Stroke = Brushes.Black;
                 DrawSpace.MouseMove += DrawSpace_MouseMove;
             }
             //przypadek usuwania elementów
@@ -138,6 +140,8 @@ namespace Wyszukiwanie_mostów_w_grafie
                         item.textBox.Text = Convert.ToString(item.id);
                     }
                 }
+                if (toDelete == tmp)
+                    tmp = null;
             }
         }
         //po upuszczeniu wierzchołka (przesunięcie)
@@ -173,6 +177,7 @@ namespace Wyszukiwanie_mostów_w_grafie
                 graph.Edges.Remove(item);
                 //Tworzę ponownie krawędź, co ponownie utworzy sąsiedztwo
                 Edge edge = new Edge(item.v1, item.v2);
+                edge.Line.Stroke = item.Line.Stroke;
                 edge.MouseLeftButtonDown += edge_MouseLeftButtonDown;
                 //rysuję ponownie krawędź
                 DrawSpace.Children.Add(edge);
@@ -294,7 +299,7 @@ namespace Wyszukiwanie_mostów_w_grafie
             deleteFlag = false;
             moveFlag = true;
             ChangeButtonColors();
-            graph.ResetBridges();
+            //graph.ResetBridges();
         }
 
         private void FindBridgesButton_Click(object sender, RoutedEventArgs e)
@@ -302,10 +307,11 @@ namespace Wyszukiwanie_mostów_w_grafie
             graph.FindBridges();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ResetGraph_Click(object sender, RoutedEventArgs e)
         {
-            this.DrawSpace.Children.Clear();
+            DrawSpace.Children.Clear();
             graph = new Graph();
+            tmp = null;
         }
 
         private void ZoomSpace_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -317,7 +323,6 @@ namespace Wyszukiwanie_mostów_w_grafie
                 {
                     st.ScaleX *= 1.1;
                     st.ScaleY *= 1.1;
-
                 }
             }
             else
@@ -328,7 +333,6 @@ namespace Wyszukiwanie_mostów_w_grafie
                     st.ScaleY *= 1 / 1.1;
                 }
             }
-            Console.WriteLine(DrawSpace.Width + " " + DrawSpace.Height + " " + st.ScaleY + " " + st.ScaleX);
         }
         private void HandlePreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {

@@ -36,6 +36,8 @@
         <Button x:Name="MoveElements" HorizontalAlignment="Left" Height="90" Margin="1143,380,0,0" VerticalAlignment="Top" Width="90" Click="MoveElements_Click">
             <TextBlock Text="Przemieść wierzchołki" TextWrapping="Wrap" TextAlignment="Center" />
         </Button>
-        <Button Content="Reset" HorizontalAlignment="Left" Margin="1143,490,0,0" VerticalAlignment="Top" Width="90" Height="90" Click="Button_Click"/>
+        <Button x:Name="ResetGraph" HorizontalAlignment="Left" Margin="1143,490,0,0" VerticalAlignment="Top" Width="90" Height="90" Click="ResetGraph_Click">
+            <TextBlock Text="Reset" TextWrapping="Wrap" TextAlignment="Center" />
+        </Button>
     </Grid>
 </Window>
