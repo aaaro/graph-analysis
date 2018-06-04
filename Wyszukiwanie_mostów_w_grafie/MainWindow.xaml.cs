@@ -38,8 +38,9 @@ namespace Wyszukiwanie_mostów_w_grafie
             graph = new Graph();
             tmp = null;
             edgeFlag = false;
-            vertexFlag = false;
+            vertexFlag = true;
             deleteFlag = false;
+            ChangeButtonColors();
         }
         //Wciśnięcie lewego przycisku myszy na canvasie
         public void DrawSpace_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
