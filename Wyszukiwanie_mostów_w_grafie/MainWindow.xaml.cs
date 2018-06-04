@@ -386,8 +386,8 @@ namespace Wyszukiwanie_mostów_w_grafie
                     v1.MouseLeftButtonUp += vertex_MouseLeftButtonUp;
                     //Rysowanie i pozycjonowanie wierzchołka
                     DrawSpace.Children.Add(v1);
-                    Canvas.SetLeft(v1, SetLeft(counter, v1.id));
-                    Canvas.SetTop(v1, SetTop(counter, v1.id));
+                    Canvas.SetLeft(v1, SetX(counter, v1.id));
+                    Canvas.SetTop(v1, SetY(counter, v1.id));
                     //Dodanie wierzchołka do grafu
                     graph.Vertices.Add(v1);
 
@@ -400,8 +400,8 @@ namespace Wyszukiwanie_mostów_w_grafie
                             v2.MouseLeftButtonUp += vertex_MouseLeftButtonUp;
                             //Rysowanie i pozycjonowanie wierzchołka
                             DrawSpace.Children.Add(v2);
-                            Canvas.SetLeft(v2, SetLeft(counter, v2.id));
-                            Canvas.SetTop(v2, SetTop(counter, v2.id));
+                            Canvas.SetLeft(v2, SetX(counter, v2.id));
+                            Canvas.SetTop(v2, SetY(counter, v2.id));
                             //Dodanie wierzchołka do grafu
                             graph.Vertices.Add(v2);
 
@@ -414,14 +414,14 @@ namespace Wyszukiwanie_mostów_w_grafie
 
         }
 
-        public double SetLeft(int counter, int vertexID)
+        public double SetX(int counter, int vertexID)
         {
             int r = 100;
             int teta = (360 / counter)*(vertexID - 1);
 
             return 500 + r * Math.Cos(teta);
         }
-        public double SetTop(int counter, int vertexID)
+        public double SetY(int counter, int vertexID)
         {
             int r = 100;
             int teta = (360 / counter) * (vertexID - 1);
@@ -434,15 +434,19 @@ namespace Wyszukiwanie_mostów_w_grafie
             int[,] adjacencyMatrix = new int[size, size];
             StreamReader sr = new StreamReader(path);
             int counter = 0;
+            string result = "";
             while (!sr.EndOfStream)
             {
                 string line = sr.ReadLine();
-                line.Split(',');
+                string[] neighbours = line.Split(',');
                 for (int i = 0; i < size; i++)
                 {
-                    adjacencyMatrix[counter, i] = line[i];
+                    adjacencyMatrix[counter, i] = Convert.ToInt32( neighbours[i]);
+                    result += adjacencyMatrix[counter, i];
                 }
+                result += "\\";
             }
+            MessageBox.Show(result);
             return adjacencyMatrix;
         }
     }
