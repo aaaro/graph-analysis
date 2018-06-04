@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Wyszukiwanie_mostów_w_grafie
 {
@@ -347,6 +350,100 @@ namespace Wyszukiwanie_mostów_w_grafie
                 var parent = ((Control)sender).Parent as UIElement;
                 parent.RaiseEvent(eventArg);
             }
+        }
+
+        private void CreateGraphFromAdjacencyMatrix(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.FileName = "Document";
+            string filename;
+            dlg.DefaultExt = ".txt";
+            dlg.Filter = "Text documents (*.txt)|*.txt";
+
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                filename = dlg.FileName;
+            }
+            else return;
+
+            StreamReader sr = new StreamReader(filename);
+            int counter = 0;
+            while(!sr.EndOfStream)
+            {
+                counter++;
+                sr.ReadLine();
+            }
+            MessageBox.Show(counter.ToString());
+
+            int[,] adjacencyMatrix = CreateAdjacencyMatrix(filename, counter);
+
+            for (int i = 0; i < counter; i++)
+            {
+                Vertex v1 = new Vertex(i + 1);
+                    v1.MouseLeftButtonDown += vertex_MouseLeftButtonDown;
+                    v1.MouseLeftButtonUp += vertex_MouseLeftButtonUp;
+                    //Rysowanie i pozycjonowanie wierzchołka
+                    DrawSpace.Children.Add(v1);
+                    Canvas.SetLeft(v1, SetLeft(counter, v1.id));
+                    Canvas.SetTop(v1, SetTop(counter, v1.id));
+                    //Dodanie wierzchołka do grafu
+                    graph.Vertices.Add(v1);
+
+                for (int j = 0; j < counter; j++)
+                {
+                    if(adjacencyMatrix[i,j] == 1 && v1.Neighbours.Exists(v => v.id == j+1))
+                    {
+                        Vertex v2 = new Vertex(j + 1);
+                            v2.MouseLeftButtonDown += vertex_MouseLeftButtonDown;
+                            v2.MouseLeftButtonUp += vertex_MouseLeftButtonUp;
+                            //Rysowanie i pozycjonowanie wierzchołka
+                            DrawSpace.Children.Add(v2);
+                            Canvas.SetLeft(v2, SetLeft(counter, v2.id));
+                            Canvas.SetTop(v2, SetTop(counter, v2.id));
+                            //Dodanie wierzchołka do grafu
+                            graph.Vertices.Add(v2);
+
+                        Edge edge = new Edge(v1, v2);
+                        DrawSpace.Children.Add(edge);
+                        graph.Edges.Add(edge);
+                    }
+                }
+            }
+
+        }
+
+        public double SetLeft(int counter, int vertexID)
+        {
+            int r = 100;
+            int teta = (360 / counter)*(vertexID - 1);
+
+            return 500 + r * Math.Cos(teta);
+        }
+        public double SetTop(int counter, int vertexID)
+        {
+            int r = 100;
+            int teta = (360 / counter) * (vertexID - 1);
+
+            return 500 + r * Math.Sin(teta);
+        }
+
+        public int[,] CreateAdjacencyMatrix(string path, int size)
+        {
+            int[,] adjacencyMatrix = new int[size, size];
+            StreamReader sr = new StreamReader(path);
+            int counter = 0;
+            while (!sr.EndOfStream)
+            {
+                string line = sr.ReadLine();
+                line.Split(',');
+                for (int i = 0; i < size; i++)
+                {
+                    adjacencyMatrix[counter, i] = line[i];
+                }
+            }
+            return adjacencyMatrix;
         }
     }
 }
