@@ -393,7 +393,7 @@ namespace Wyszukiwanie_mostów_w_grafie
 
                 for (int j = 0; j < counter; j++)
                 {
-                    if(adjacencyMatrix[i,j] == 1 && v1.Neighbours.Exists(v => v.id == j+1))
+                    if(adjacencyMatrix[i,j] == 1 && !v1.Neighbours.Exists(v => v.id == j+1))
                     {
                         Vertex v2 = new Vertex(j + 1);
                             v2.MouseLeftButtonDown += vertex_MouseLeftButtonDown;
