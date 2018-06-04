@@ -114,7 +114,7 @@ namespace Wyszukiwanie_mostów_w_grafie
         }
         public void ResetBridges()
         {
-            foreach (var edge in Edges.FindAll(e => e.Line.Stroke == Brushes.Red))
+            foreach (var edge in Edges)
             {
                 edge.Line.Stroke = Brushes.Black;
             }

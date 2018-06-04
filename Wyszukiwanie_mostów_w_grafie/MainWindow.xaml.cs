@@ -87,7 +87,8 @@ namespace Wyszukiwanie_mostów_w_grafie
                    
                     DrawSpace.Children.Add(edge);
 
-                    graph.Edges.Add(edge);
+                    if(edge.Line != null)
+                        graph.Edges.Add(edge);
                     tmp = null;
                 }
                 else
