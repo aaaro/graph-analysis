@@ -375,13 +375,18 @@ namespace Wyszukiwanie_mostów_w_grafie
                 counter++;
                 sr.ReadLine();
             }
-            MessageBox.Show(counter.ToString());
 
             int[,] adjacencyMatrix = CreateAdjacencyMatrix(filename, counter);
-
+            Vertex v1;
+            Vertex v2;
             for (int i = 0; i < counter; i++)
             {
-                Vertex v1 = new Vertex(i + 1);
+                if (graph.Vertices.Exists(v => v.id == i + 1))
+                {
+                    v1 = graph.Vertices.Find(v => v.id == i + 1);
+                } else
+                {
+                    v1 = new Vertex(i + 1);
                     v1.MouseLeftButtonDown += vertex_MouseLeftButtonDown;
                     v1.MouseLeftButtonUp += vertex_MouseLeftButtonUp;
                     //Rysowanie i pozycjonowanie wierzchołka
@@ -390,12 +395,18 @@ namespace Wyszukiwanie_mostów_w_grafie
                     Canvas.SetTop(v1, SetY(counter, v1.id));
                     //Dodanie wierzchołka do grafu
                     graph.Vertices.Add(v1);
-
+                }
                 for (int j = 0; j < counter; j++)
                 {
                     if(adjacencyMatrix[i,j] == 1 && !v1.Neighbours.Exists(v => v.id == j+1))
                     {
-                        Vertex v2 = new Vertex(j + 1);
+                        if (graph.Vertices.Exists(v => v.id == j + 1))
+                        {
+                            v2 = graph.Vertices.Find(v => v.id == j + 1);
+                        }
+                        else
+                        {
+                            v2 = new Vertex(j + 1);
                             v2.MouseLeftButtonDown += vertex_MouseLeftButtonDown;
                             v2.MouseLeftButtonUp += vertex_MouseLeftButtonUp;
                             //Rysowanie i pozycjonowanie wierzchołka
@@ -404,7 +415,7 @@ namespace Wyszukiwanie_mostów_w_grafie
                             Canvas.SetTop(v2, SetY(counter, v2.id));
                             //Dodanie wierzchołka do grafu
                             graph.Vertices.Add(v2);
-
+                        }
                         Edge edge = new Edge(v1, v2);
                         DrawSpace.Children.Add(edge);
                         graph.Edges.Add(edge);
@@ -416,17 +427,17 @@ namespace Wyszukiwanie_mostów_w_grafie
 
         public double SetX(int counter, int vertexID)
         {
-            int r = 100;
+            int r = 200;
             double teta = (2 * Math.PI / counter)*(vertexID - 1);
 
-            return 500 + r * Math.Cos(teta);
+            return 300 + r * Math.Cos(teta);
         }
         public double SetY(int counter, int vertexID)
         {
-            int r = 100;
+            int r = 200;
 			double teta = (2 * Math.PI / counter) * (vertexID - 1);
 
-            return 500 + r * Math.Sin(teta);
+            return 300 + r * Math.Sin(teta);
         }
 
         public int[,] CreateAdjacencyMatrix(string path, int size)
@@ -434,7 +445,6 @@ namespace Wyszukiwanie_mostów_w_grafie
             int[,] adjacencyMatrix = new int[size, size];
             StreamReader sr = new StreamReader(path);
             int counter = 0;
-            string result = "";
             while (!sr.EndOfStream)
             {
                 string line = sr.ReadLine();
@@ -442,11 +452,9 @@ namespace Wyszukiwanie_mostów_w_grafie
                 for (int i = 0; i < size; i++)
                 {
                     adjacencyMatrix[counter, i] = Convert.ToInt32( neighbours[i]);
-                    result += adjacencyMatrix[counter, i];
                 }
-                result += "\\";
+                counter++;
             }
-            MessageBox.Show(result);
             return adjacencyMatrix;
         }
     }
