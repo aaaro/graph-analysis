@@ -417,14 +417,14 @@ namespace Wyszukiwanie_mostów_w_grafie
         public double SetX(int counter, int vertexID)
         {
             int r = 100;
-            int teta = (360 / counter)*(vertexID - 1);
+            double teta = (2 * Math.PI / counter)*(vertexID - 1);
 
             return 500 + r * Math.Cos(teta);
         }
         public double SetY(int counter, int vertexID)
         {
             int r = 100;
-            int teta = (360 / counter) * (vertexID - 1);
+			double teta = (2 * Math.PI / counter) * (vertexID - 1);
 
             return 500 + r * Math.Sin(teta);
         }
