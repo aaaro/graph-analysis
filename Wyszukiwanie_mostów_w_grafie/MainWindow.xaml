@@ -5,13 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wyszukiwanie_mostów_w_grafie"
         mc:Ignorable="d"
-        Title="Poszukiwanie mostów" Height="720" Width="1280" Name="window">
+        Title="Poszukiwanie mostów" Height="720" Width="1280" Name="window"
+        ResizeMode="NoResize">
     <Grid>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="1272" Background="#FFBFB9B9">
-            <MenuItem Header="Input">
-                <MenuItem Header="Z macierzy sąsiedztwa" Click="CreateGraphFromAdjacencyMatrix"/>
-            </MenuItem>
-        </Menu>
         <Canvas x:Name="ZoomSpace" HorizontalAlignment="Left" Height="667" Margin="0,22,0,0" VerticalAlignment="Top" Width="1102" Background="Black" ClipToBounds="True" MouseWheel="ZoomSpace_MouseWheel">
             <ScrollViewer x:Name="sv" Height="660" Width="1102" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" PreviewMouseWheel="HandlePreviewMouseWheel">
                 <Canvas x:Name="DrawSpace" HorizontalAlignment="Left" Height="2786" Margin="0,0,0,0" VerticalAlignment="Top" Width="4603" Cursor="Pen" MouseLeftButtonDown="DrawSpace_MouseLeftButtonDown" Background="White">
